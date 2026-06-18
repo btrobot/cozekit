@@ -472,9 +472,18 @@ class ASTBuilder:
             self._extract_output_var(c, source_file)
             for c in children_raw if isinstance(c, dict)
         ) if isinstance(children_raw, list) else ()
+
+        # Extract type: prefer top-level "type", fall back to "input.type"
+        # (coze-studio format puts type inside the input value expression)
+        var_type = item.get('type')
+        if not var_type:
+            inp = item.get('input')
+            if isinstance(inp, dict):
+                var_type = inp.get('type')
+
         return OutputVarAST(
             name=item.get('name'),
-            var_type=item.get('type'),
+            var_type=var_type,
             required=bool(item.get('required', False)),
             default_value=item.get('defaultValue'),
             children=children,
@@ -565,14 +574,47 @@ class ASTBuilder:
             return []
         return self._extract_parameters(params_raw, source_file)
 
+
+    @staticmethod
+    def _extract_ref_from_field(fld: dict) -> RefAST | None:
+        """Extract a RefAST from a value expression field dict.
+
+        Handles: {"type": ..., "value": {"type": "ref", "content": {...}}}
+        and:     {"type": ..., "value": {"type": "literal", "content": "..."}}
+        """
+        if not isinstance(fld, dict):
+            return None
+        val = fld.get('value')
+        if not isinstance(val, dict):
+            return None
+        vc = val.get('content')
+        if isinstance(vc, dict):
+            return RefAST(
+                ref_type=str(val.get('type')) if val.get('type') else None,
+                source=vc.get('source'),
+                block_id=vc.get('blockID') if vc.get('blockID') is not None else vc.get('blockId'),
+                name=vc.get('name'),
+                path=tuple(vc.get('path') or ()),
+            )
+        if vc is not None:
+            return RefAST(
+                ref_type=str(val.get('type')) if val.get('type') else 'literal',
+                name=str(vc),
+            )
+        return None
+
     def _extract_parameters(
         self, inputs: list, source_file: str | None
     ) -> list[ParameterAST]:
         """Extract parameters from inputParameters list.
 
         Handles two formats:
-        1. Coze full format: {name, left: {type, value: {type, content: {...}}}}
-        2. Simple format: {name, type/leftType, inputRef/leftRef: {...}}
+        1. Coze-studio format: {name: varName, left: {value: ...}, input/right: {value: ...}}
+           Each entry represents one variable assignment. ``left_ref`` and ``right_ref``
+           are populated on the ParameterAST so the validator can check both sides.
+        2. Cozekit internal format: {name: "left", input: {value: ...}} + {name: "right", ...}
+           Each entry is a separate parameter named "left" or "right".
+        3. Simple format: {name, type/leftType, inputRef/leftRef: {...}}
         """
         if not isinstance(inputs, list):
             return []
@@ -593,7 +635,28 @@ class ASTBuilder:
                         left_type = lt
                         break
 
-            # Extract ref from complex format
+            # Detect coze-studio format: entry has both "left" and "input"/"right"
+            # as dicts with "value" subfield, and name is NOT "left" (cozekit internal)
+            left_field = inp.get('left')
+            right_field = inp.get('right') or inp.get('input')
+            left_has_value = isinstance(left_field, dict) and 'value' in left_field
+            right_has_value = isinstance(right_field, dict) and 'value' in right_field
+
+            if left_has_value and right_has_value and name != 'left':
+                # Coze-studio format: populate left_ref and right_ref
+                left_ref = self._extract_ref_from_field(left_field)
+                right_ref = self._extract_ref_from_field(right_field)
+                params.append(ParameterAST(
+                    name=name if isinstance(name, str) else None,
+                    left_type=left_type if isinstance(left_type, str) else None,
+                    input_ref=right_ref,  # backward compat: input_ref = value side
+                    left_ref=left_ref,
+                    right_ref=right_ref,
+                    provenance=SourceProvenance(source_file=source_file),
+                ))
+                continue
+
+            # Standard extraction: find first matching field
             ref = None
             for key in ('input', 'left', 'right'):
                 fld = inp.get(key)
@@ -606,7 +669,6 @@ class ASTBuilder:
                     if isinstance(val, dict):
                         vc = val.get('content')
                         if isinstance(vc, dict):
-                            # Reference value (block-output, global_variable, etc.)
                             ref = RefAST(
                                 ref_type=str(val.get('type')) if val.get('type') else None,
                                 source=vc.get('source'),
@@ -616,8 +678,6 @@ class ASTBuilder:
                             )
                             break
                         elif vc is not None:
-                            # Any value with a type (literal, invalid, etc.)
-                            # Store the value in name field for later validation
                             ref = RefAST(
                                 ref_type=str(val.get('type')) if val.get('type') else 'literal',
                                 name=str(vc),

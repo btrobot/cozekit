@@ -127,10 +127,10 @@ class TestDefaultValueSchema_Negative:
         assert any('not valid JSON' in e for e in errors)
 
     def test_string_type_with_int_value(self):
-        """string type with JSON int → type mismatch."""
+        """string type accepts any defaultValue (plain or JSON) → no error."""
         yaml = _make_output_yaml('result', 'string', '42')
         errors = _fe013_errors(yaml)
-        assert any('does not match' in e for e in errors)
+        assert not any('does not match' in e for e in errors)
 
     def test_integer_type_with_string_value(self):
         """integer type with JSON string → type mismatch."""
@@ -157,10 +157,10 @@ class TestDefaultValueSchema_Negative:
         assert any('does not match' in e for e in errors)
 
     def test_plain_text_not_json(self):
-        """Plain text (not JSON) → error."""
+        """Plain text for string type → accepted (no JSON validation for string)."""
         yaml = _make_output_yaml('result', 'string', 'just plain text')
         errors = _fe013_errors(yaml)
-        assert any('not valid JSON' in e for e in errors)
+        assert not any('not valid JSON' in e for e in errors)
 
 
 # ── Edge cases ─────────────────────────────────────────────────
@@ -187,7 +187,7 @@ class TestDefaultValueSchema_EdgeCases:
         assert not any('defaultValue' in e for e in errors)
 
     def test_null_json_value(self):
-        """JSON null → type mismatch for any declared type."""
+        """JSON null for string type → accepted (string accepts any value)."""
         yaml = _make_output_yaml('result', 'string', 'null')
         errors = _fe013_errors(yaml)
-        assert any('does not match' in e for e in errors)
+        assert not any('does not match' in e for e in errors)

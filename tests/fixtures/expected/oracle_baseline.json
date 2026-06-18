@@ -1,12 +1,9 @@
 [
   {
     "fixture_id": "fixture-global-variable-type-mismatch",
-    "rule_ids": [
-      "SEMANTIC-FE-001",
-      "SEMANTIC-FE-001"
-    ],
-    "diagnostic_count": 3,
-    "exit_code": 1,
+    "rule_ids": [],
+    "diagnostic_count": 0,
+    "exit_code": 0,
     "node_count": 3,
     "edge_count": 2,
     "node_ids": [

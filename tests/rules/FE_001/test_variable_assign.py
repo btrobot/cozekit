@@ -246,3 +246,196 @@ edges:
 """
         errors = _fe001_errors(yaml)
         assert any('variable' in e.lower() for e in errors)
+
+# ── Coze-studio format ─────────────────────────────────────────
+
+class TestFE001_VariableAssign_CozeStudioFormat:
+    """Coze-studio real data format: entries with left/right as fields, not names.
+
+    Format: {"name": "varName", "left": {...}, "input"/"right": {...}}
+    The AST builder normalizes this to cozekit internal format before validation.
+    """
+
+    def test_coze_studio_format_with_left_and_input(self):
+        """Coze-studio format with left + input → no FE-001 Variable Assign errors."""
+        yaml = """
+nodes:
+  - id: '100001'
+    type: '1'
+    data:
+      nodeMeta:
+        title: Start
+  - id: 'va1'
+    type: '20'
+    data:
+      nodeMeta:
+        title: SetVar
+      inputs:
+        inputParameters:
+          - name: app_v1
+            left:
+              type: string
+              value:
+                type: ref
+                content:
+                  source: global_variable_app
+                  path: ['app_v1']
+                  blockID: ''
+                  name: ''
+            input:
+              type: string
+              value:
+                type: literal
+                content: 'hello'
+  - id: '900001'
+    type: '2'
+    data:
+      nodeMeta:
+        title: End
+edges:
+  - sourceNodeID: '100001'
+    targetNodeID: 'va1'
+  - sourceNodeID: 'va1'
+    targetNodeID: '900001'
+"""
+        errors = _fe001_errors(yaml)
+        assert not any('variable' in e.lower() for e in errors)
+
+    def test_coze_studio_format_with_left_and_right(self):
+        """Coze-studio format with left + right → no FE-001 Variable Assign errors."""
+        yaml = """
+nodes:
+  - id: '100001'
+    type: '1'
+    data:
+      nodeMeta:
+        title: Start
+  - id: 'va1'
+    type: '40'
+    data:
+      nodeMeta:
+        title: SetVar
+      inputs:
+        inputParameters:
+          - name: my_var
+            left:
+              type: string
+              value:
+                type: ref
+                content:
+                  source: global_variable_app
+                  path: ['my_var']
+                  blockID: ''
+                  name: ''
+            right:
+              type: string
+              value:
+                type: ref
+                content:
+                  source: block-output
+                  blockID: '100001'
+                  name: 'input'
+  - id: '900001'
+    type: '2'
+    data:
+      nodeMeta:
+        title: End
+edges:
+  - sourceNodeID: '100001'
+    targetNodeID: 'va1'
+  - sourceNodeID: 'va1'
+    targetNodeID: '900001'
+"""
+        errors = _fe001_errors(yaml)
+        assert not any('variable' in e.lower() for e in errors)
+
+    def test_coze_studio_format_no_name_field(self):
+        """Coze-studio format without name field → no FE-001 Variable Assign errors."""
+        yaml = """
+nodes:
+  - id: '100001'
+    type: '1'
+    data:
+      nodeMeta:
+        title: Start
+  - id: 'va1'
+    type: '20'
+    data:
+      nodeMeta:
+        title: SetVar
+      inputs:
+        inputParameters:
+          - left:
+              type: string
+              value:
+                type: ref
+                content:
+                  source: block-output
+                  blockID: '100001'
+                  name: 'variable'
+            right:
+              type: string
+              value:
+                type: ref
+                content:
+                  source: block-output
+                  blockID: '100001'
+                  name: 'input'
+  - id: '900001'
+    type: '2'
+    data:
+      nodeMeta:
+        title: End
+edges:
+  - sourceNodeID: '100001'
+    targetNodeID: 'va1'
+  - sourceNodeID: 'va1'
+    targetNodeID: '900001'
+"""
+        errors = _fe001_errors(yaml)
+        assert not any('variable' in e.lower() for e in errors)
+
+    def test_coze_studio_format_empty_left_still_errors(self):
+        """Coze-studio format with empty left value → still reports error."""
+        yaml = """
+nodes:
+  - id: '100001'
+    type: '1'
+    data:
+      nodeMeta:
+        title: Start
+  - id: 'va1'
+    type: '20'
+    data:
+      nodeMeta:
+        title: SetVar
+      inputs:
+        inputParameters:
+          - name: app_v1
+            left:
+              type: string
+              value:
+                type: ref
+                content:
+                  source: global_variable_app
+                  path: []
+                  blockID: ''
+                  name: ''
+            input:
+              type: string
+              value:
+                type: literal
+                content: 'hello'
+  - id: '900001'
+    type: '2'
+    data:
+      nodeMeta:
+        title: End
+edges:
+  - sourceNodeID: '100001'
+    targetNodeID: 'va1'
+  - sourceNodeID: 'va1'
+    targetNodeID: '900001'
+"""
+        errors = _fe001_errors(yaml)
+        assert any('left' in e.lower() for e in errors)

@@ -112,11 +112,31 @@ def validate_output_tree(outputs, diagnostics, node):
 
 def check_default_value_schema(out, diagnostics: list[Diagnostic], node,
     ) -> None:
-    """VAL-JSON-SCHEMA-001: validate defaultValue against declared type."""
+    """VAL-JSON-SCHEMA-001: validate defaultValue against declared type.
+
+    Per SPEC-OUT-007, JSON validity and type compatibility are checked for
+    JSON/object/list types.  For string/time types, plain string default
+    values like "Default" are accepted without JSON parsing.  For typed
+    scalars (integer, number, float, boolean), defaultValue must be valid
+    JSON matching the declared type.
+    """
     import json
     dv = out.default_value
     if not dv or not isinstance(dv, str) or not dv.strip():
         return
+
+    vtype = out.var_type
+    if not vtype:
+        return
+
+    vtype_lower = vtype.lower()
+
+    # String/time types accept plain string defaultValues (e.g. "Default")
+    # without JSON parsing — per coze-studio real data conventions.
+    if vtype_lower in ('string', 'time'):
+        return
+
+    # JSON/object/list and typed scalars require valid JSON defaultValue
     try:
         parsed = json.loads(dv)
     except (json.JSONDecodeError, ValueError):
@@ -127,11 +147,9 @@ def check_default_value_schema(out, diagnostics: list[Diagnostic], node,
             source_span=node.source_span,
         ))
         return
+
     # Check type compatibility
-    vtype = out.var_type
-    if not vtype:
-        return
-    expected = _VAR_TYPE_TO_JSON_TYPE.get(vtype)
+    expected = _VAR_TYPE_TO_JSON_TYPE.get(vtype_lower)
     if not expected:
         return
     json_type = type(parsed).__name__
