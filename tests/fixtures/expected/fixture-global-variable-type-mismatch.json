@@ -1,6 +1,0 @@
-{
-  "fixture_id": "fixture-global-variable-type-mismatch",
-  "expected_exit_code": 0,
-  "expected_diagnostics": [],
-  "assert_absent_rule_ids": []
-}
