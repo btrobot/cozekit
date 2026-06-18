@@ -131,13 +131,9 @@ def pytest_collection_modifyitems(items):
             continue
 
         # Apply markers based on path
-        if '/rules/' in path:
+        if '/spec/' in path:
             item.add_marker(pytest.mark.spec)
-        elif '/infra/' in path:
-            item.add_marker(pytest.mark.integration)
-        elif '/ast/' in path:
-            item.add_marker(pytest.mark.integration)
-        elif '/transport/' in path:
-            item.add_marker(pytest.mark.integration)
-        elif '/passes/' in path:
+        elif '/unit/' in path:
+            item.add_marker(pytest.mark.unit)
+        elif '/integration/' in path:
             item.add_marker(pytest.mark.integration)
