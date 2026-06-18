@@ -585,6 +585,8 @@ class ASTBuilder:
         if not isinstance(fld, dict):
             return None
         val = fld.get('value')
+        if isinstance(val, str):
+            return RefAST(ref_type='literal', name=val)
         if not isinstance(val, dict):
             return None
         vc = val.get('content')
@@ -666,6 +668,9 @@ class ASTBuilder:
                         if isinstance(name_candidate, str):
                             name = name_candidate
                     val = fld.get('value')
+                    if isinstance(val, str):
+                        ref = RefAST(ref_type='literal', name=val)
+                        break
                     if isinstance(val, dict):
                         vc = val.get('content')
                         if isinstance(vc, dict):

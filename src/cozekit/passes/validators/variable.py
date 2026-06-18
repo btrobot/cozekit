@@ -8,7 +8,7 @@ from ..constants import (
     VARIABLE_MERGE_NODE_TYPE_ID,
 )
 
-def _ref_has_identifier(ref) -> bool:
+def _ref_has_identifier(ref, *, allow_empty_literal: bool = True) -> bool:
     """Check if a RefAST has a meaningful identifier.
 
     For global_variable refs, the identifier is in ``path`` (e.g. ('app_v1',)).
@@ -16,6 +16,8 @@ def _ref_has_identifier(ref) -> bool:
     """
     if ref is None:
         return False
+    if allow_empty_literal and ref.ref_type == 'literal':
+        return True
     if ref.name and ref.name.strip():
         return True
     if ref.path and ref.path[0] and ref.path[0].strip():

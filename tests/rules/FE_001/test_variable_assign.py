@@ -114,11 +114,11 @@ class TestFE001_VariableAssign_Positive:
         errors = _fe001_errors(yaml)
         assert not any('variable' in e.lower() for e in errors)
 
-    def test_right_with_empty_string(self):
-        """Right with empty string literal → error (empty treated as missing)."""
+    def test_right_with_empty_string_literal(self):
+        """Right with empty string literal → valid (="" is legal CWL assignment)."""
         yaml = _make_var_assign_yaml(right='')
         errors = _fe001_errors(yaml)
-        assert any('right' in e.lower() for e in errors)
+        assert not any('right' in e.lower() for e in errors)
 
 
 # ── Negative ─────────────────────────────────────────────────────
@@ -439,3 +439,94 @@ edges:
 """
         errors = _fe001_errors(yaml)
         assert any('left' in e.lower() for e in errors)
+
+
+# ── Empty string literal edge case ──────────────────────────────
+
+class TestFE001_VariableAssign_EmptyStringLiteral:
+    """Empty string literal (current = "") is a legal CWL assignment."""
+
+    def test_coze_studio_format_empty_literal_value(self):
+        """Coze-studio format: input.value is empty string → valid."""
+        yaml = """
+nodes:
+  - id: '100001'
+    type: '1'
+    data:
+      nodeMeta:
+        title: Start
+  - id: 'va1'
+    type: '40'
+    data:
+      nodeMeta:
+        title: SetVar
+      inputs:
+        inputParameters:
+          - name: current
+            left:
+              type: string
+              value:
+                type: ref
+                content:
+                  source: block-output
+                  blockID: '110527'
+                  name: output
+            input:
+              type: string
+              value:
+                type: literal
+                content: ''
+  - id: '900001'
+    type: '2'
+    data:
+      nodeMeta:
+        title: End
+edges:
+  - sourceNodeID: '100001'
+    targetNodeID: 'va1'
+  - sourceNodeID: 'va1'
+    targetNodeID: '900001'
+"""
+        errors = _fe001_errors(yaml)
+        assert not any('right' in e.lower() for e in errors)
+
+    def test_coze_studio_format_empty_string_value_field(self):
+        """Coze-studio format: input.value is plain empty string (not a dict) → valid."""
+        yaml = """
+nodes:
+  - id: '100001'
+    type: '1'
+    data:
+      nodeMeta:
+        title: Start
+  - id: 'va1'
+    type: '40'
+    data:
+      nodeMeta:
+        title: SetVar
+      inputs:
+        inputParameters:
+          - name: current
+            left:
+              type: string
+              value:
+                type: ref
+                content:
+                  source: block-output
+                  blockID: '110527'
+                  name: output
+            input:
+              value: ''
+  - id: '900001'
+    type: '2'
+    data:
+      nodeMeta:
+        title: End
+edges:
+  - sourceNodeID: '100001'
+    targetNodeID: 'va1'
+  - sourceNodeID: 'va1'
+    targetNodeID: '900001'
+"""
+        errors = _fe001_errors(yaml)
+        assert not any('right' in e.lower() for e in errors)

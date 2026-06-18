@@ -132,8 +132,37 @@ def check_global_variable_types(ctx: PassContext, diagnostics: list[Diagnostic])
                         source_span=node.source_span,
                     ))
 
+def _infer_type_from_ref_target(
+    ctx: 'PassContext',
+    block_id: str,
+    ref_name: str | None,
+) -> str | None:
+    """Infer type from a ref target's output declarations.
+
+    Used when the source parameter has no declared type — look up the
+    target node's output variables to determine the type.
+    """
+    from ..sema.type_system import canonicalize_type
+    if not block_id:
+        return None
+    target_node = ctx.sema.node_by_id(block_id)
+    if target_node is None:
+        return None
+    if ref_name and target_node.outputs:
+        for out in target_node.outputs:
+            if out.name == ref_name and out.var_type:
+                return canonicalize_type(out.var_type)
+    return None
+
+
 def check_type_compatibility(ctx: PassContext, diagnostics: list[Diagnostic]) -> None:
-    """BE-021: type compatibility for parameter assignments."""
+    """BE-021: type compatibility for parameter assignments.
+
+    Supports three source type resolution strategies:
+    1. Explicit declared type on the parameter
+    2. Inferred type from ref target's output declarations (when no declared type)
+    3. Skip (global variables, missing targets)
+    """
     from ..sema.type_system import (
         infer_type, check_compatibility, CompatibilityState,
         canonicalize_type, extract_declared_type_from_param,
@@ -147,8 +176,15 @@ def check_type_compatibility(ctx: PassContext, diagnostics: list[Diagnostic]) ->
                 # Skip global variable refs (runtime-deferred)
                 if resolved.is_global:
                     continue
-                # Source type: declared type on this parameter
+                # Source type: declared type on this parameter, or inferred from ref target
                 source_type_raw = extract_declared_type_from_param(param)
+                inferred = False
+                if source_type_raw is None:
+                    ref_name_hint = resolved.name or (resolved.path[0] if resolved.path else None)
+                    source_type_raw = _infer_type_from_ref_target(
+                        ctx, resolved.block_id, ref_name_hint,
+                    )
+                    inferred = True
                 if source_type_raw is None:
                     continue
                 # Target type: declared type on the referenced node's output
@@ -176,11 +212,12 @@ def check_type_compatibility(ctx: PassContext, diagnostics: list[Diagnostic]) ->
                 target_fact = infer_type(target_type_raw)
                 compat = check_compatibility(source_fact, target_fact)
                 if compat == CompatibilityState.INCOMPATIBLE:
+                    suffix = ' (inferred)' if inferred else ''
                     diagnostics.append(_diag_be(
                         'SEMANTIC-BE-021', 'warning',
-                        f'type mismatch: parameter \'{param.name}\' expects '
-                        f'\'{source_type_raw}\' but ref target \'{ref_name}\' '
-                        f'is \'{target_type_raw}\'',
+                        f"type mismatch{suffix}: parameter '{param.name}' expects "
+                        f"'{source_type_raw}' but ref target '{ref_name}' "
+                        f"is '{target_type_raw}'",
                         source_span=node.source_span,
                     ))
 

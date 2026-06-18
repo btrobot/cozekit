@@ -107,7 +107,7 @@ class FrontendPass:
             if title_counts[title] > 1:
                 diagnostics.append(_diag_fe(
                     'SEMANTIC-FE-011', 'violation',
-                    'node title must be unique across the assembled workflow',
+                    'node title must be unique within the same canvas',
                     checkability=Checkability.OFFLINE,
                     source_span=span,
                 ))

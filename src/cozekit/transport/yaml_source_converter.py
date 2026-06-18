@@ -17,7 +17,7 @@ from typing import Any
 TYPE_NAME_TO_ID: dict[str, str] = {
     'start': '1', 'end': '2', 'llm': '3', 'plugin': '4',
     'code': '5', 'dataset': '6', 'if': '8', 'condition': '8',
-    'subworkflow': '9', 'sub_workflow': '9', 'variable': '11',
+    'subworkflow': '9', 'sub_workflow': '9', 'subflow': '9', 'variable': '11',
     'database': '12', 'output': '13', 'imageflow': '14',
     'text': '15', 'image_generate': '16', 'imagegenerate': '16',
     'image_reference': '17', 'question': '18', 'break': '19',
@@ -29,21 +29,21 @@ TYPE_NAME_TO_ID: dict[str, str] = {
     'input': '30', 'comment': '31', 'variable_merge': '32',
     'variablemerge': '32', 'trigger_upsert': '34', 'triggerupsert': '34',
     'trigger_delete': '35', 'triggerdelete': '35', 'trigger_read': '36',
-    'triggerread': '36', 'query_message_list': '37', 'querymessagelist': '37',
-    'clear_context': '38', 'clearcontext': '38', 'create_conversation': '39',
+    'triggerread': '36', 'query_message_list': '37', 'querymessagelist': '37', 'message_list': '37',
+    'clear_context': '38', 'clearcontext': '38', 'conversation_clear': '38', 'create_conversation': '39', 'conversation_create': '39',
     'createconversation': '39', 'variable_assign': '40', 'variableassign': '40',
-    'database_update': '42', 'databaseupdate': '42', 'database_query': '43',
-    'databasequery': '43', 'database_delete': '44', 'databasedelete': '44',
-    'http': '45', 'database_create': '46', 'databasecreate': '46',
-    'update_conversation': '51', 'updateconversation': '51',
-    'delete_conversation': '52', 'deleteconversation': '52',
-    'query_conversation_list': '53', 'queryconversationlist': '53',
-    'query_conversation_history': '54', 'queryconversationhistory': '54',
-    'create_message': '55', 'createmessage': '55',
-    'update_message': '56', 'updatemessage': '56',
-    'delete_message': '57', 'deletemessage': '57',
-    'json_stringify': '58', 'jsonstringify': '58',
-    'json_parser': '59', 'jsonparser': '59',
+    'database_update': '42', 'databaseupdate': '42', 'update_record': '42', 'database_query': '43',
+    'databasequery': '43', 'select_record': '43', 'database_delete': '44', 'databasedelete': '44', 'delete_record': '44',
+    'http': '45', 'database_create': '46', 'databasecreate': '46', 'insert_record': '46',
+    'update_conversation': '51', 'updateconversation': '51', 'conversation_update': '51',
+    'delete_conversation': '52', 'deleteconversation': '52', 'conversation_delete': '52',
+    'query_conversation_list': '53', 'queryconversationlist': '53', 'conversation_list': '53',
+    'query_conversation_history': '54', 'queryconversationhistory': '54', 'conversation_history_list': '54',
+    'create_message': '55', 'message_create': '55', 'createmessage': '55',
+    'update_message': '56', 'updatemessage': '56', 'message_update': '56',
+    'delete_message': '57', 'deletemessage': '57', 'message_delete': '57',
+    'json_stringify': '58', 'jsonstringify': '58', 'to_json': '58',
+    'json_parser': '59', 'jsonparser': '59', 'from_json': '59',
     'dataset_delete': '60', 'datasetdelete': '60',
     'audio2text': '61', 'text2audio': '62',
     'video_audio_extractor': '63', 'video_frame_extractor': '64',
@@ -210,6 +210,11 @@ class YamlSourceConverter:
     def _adapt_input_param(self, item: dict) -> dict:
         """Convert a node_input item to inputParameters format."""
         result: dict[str, Any] = {'name': str(item.get('name', ''))}
+        # Preserve left/right fields for variable_assign nodes
+        for side_key in ('left', 'right'):
+            side_val = item.get(side_key)
+            if isinstance(side_val, dict):
+                result[side_key] = self._adapt_block_input(side_val)
         inp = item.get('input')
         if isinstance(inp, dict):
             result['input'] = self._adapt_block_input(inp)
@@ -324,8 +329,9 @@ class YamlSourceConverter:
         # Has explicit type/schema/value structure
         if any(k in raw for k in ('type', 'value', 'schema', 'assistType', 'items', 'properties')):
             result: dict[str, Any] = {}
-            raw_type = raw.get('type', 'string')
-            result['type'] = VAR_TYPE_MAP.get(str(raw_type), str(raw_type))
+            raw_type = raw.get('type')
+            if raw_type is not None:
+                result['type'] = VAR_TYPE_MAP.get(str(raw_type), str(raw_type))
             if 'value' in raw:
                 result['value'] = self._adapt_value_expr(raw['value'])
             if 'schema' in raw:
