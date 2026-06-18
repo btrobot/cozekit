@@ -1,0 +1,73 @@
+{
+  "nodes": [
+    {
+      "id": "100001",
+      "type": "1",
+      "data": {
+        "nodeMeta": {
+          "title": "Start"
+        }
+      }
+    },
+    {
+      "id": "llm-1",
+      "type": "3",
+      "data": {
+        "nodeMeta": {
+          "title": "LLM"
+        },
+        "inputs": {
+          "inputParameters": [
+            {
+              "name": "prompt",
+              "input": {
+                "type": "string",
+                "value": {
+                  "type": "ref",
+                  "content": {
+                    "source": "global_variable_app",
+                    "path": [
+                      "app_v1"
+                    ],
+                    "blockID": "100001"
+                  }
+                }
+              }
+            }
+          ],
+          "llmParam": [
+            {
+              "name": "modelType",
+              "input": {
+                "type": "integer",
+                "value": {
+                  "type": "literal",
+                  "content": "1001"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "900001",
+      "type": "2",
+      "data": {
+        "nodeMeta": {
+          "title": "End"
+        }
+      }
+    }
+  ],
+  "edges": [
+    {
+      "sourceNodeID": "100001",
+      "targetNodeID": "llm-1"
+    },
+    {
+      "sourceNodeID": "llm-1",
+      "targetNodeID": "900001"
+    }
+  ]
+}

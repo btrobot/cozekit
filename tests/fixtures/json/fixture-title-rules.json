@@ -1,0 +1,54 @@
+{
+  "nodes": [
+    {
+      "id": "100001",
+      "type": "1",
+      "data": {
+        "nodeMeta": {
+          "title": ""
+        }
+      }
+    },
+    {
+      "id": "n1",
+      "type": "3",
+      "data": {
+        "nodeMeta": {
+          "title": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        }
+      }
+    },
+    {
+      "id": "n2",
+      "type": "5",
+      "data": {
+        "nodeMeta": {
+          "title": "dup"
+        }
+      }
+    },
+    {
+      "id": "900001",
+      "type": "2",
+      "data": {
+        "nodeMeta": {
+          "title": "dup"
+        }
+      }
+    }
+  ],
+  "edges": [
+    {
+      "sourceNodeID": "100001",
+      "targetNodeID": "n1"
+    },
+    {
+      "sourceNodeID": "n1",
+      "targetNodeID": "n2"
+    },
+    {
+      "sourceNodeID": "n2",
+      "targetNodeID": "900001"
+    }
+  ]
+}

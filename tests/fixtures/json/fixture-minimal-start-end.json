@@ -1,0 +1,28 @@
+{
+  "nodes": [
+    {
+      "id": "100001",
+      "type": "1",
+      "data": {
+        "nodeMeta": {
+          "title": "Start"
+        }
+      }
+    },
+    {
+      "id": "900001",
+      "type": "2",
+      "data": {
+        "nodeMeta": {
+          "title": "End"
+        }
+      }
+    }
+  ],
+  "edges": [
+    {
+      "sourceNodeID": "100001",
+      "targetNodeID": "900001"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+nodes:
+  - id: '100001'
+    type: '1'
+    data:
+      nodeMeta:
+        title: Start
+  - id: 'loop-1'
+    type: '21'
+    data:
+      nodeMeta:
+        title: Loop
+    blocks:
+      - id: 'batch-1'
+        type: '28'
+        data:
+          nodeMeta:
+            title: Batch
+      - id: '900001'
+        type: '2'
+        data:
+          nodeMeta:
+            title: InnerEnd
+    edges:
+      - sourceNodeID: 'loop-1'
+        sourcePortID: 'loop-function-inline-output'
+        targetNodeID: 'batch-1'
+      - sourceNodeID: 'batch-1'
+        targetNodeID: '900001'
+      - sourceNodeID: '900001'
+        targetNodeID: 'loop-1'
+        targetPortID: 'loop-function-inline-input'
+  - id: '900001'
+    type: '2'
+    data:
+      nodeMeta:
+        title: End
+edges:
+  - sourceNodeID: '100001'
+    targetNodeID: 'loop-1'
+  - sourceNodeID: 'loop-1'
+    targetNodeID: '900001'

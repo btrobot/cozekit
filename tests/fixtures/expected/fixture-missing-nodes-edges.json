@@ -1,0 +1,25 @@
+{
+  "fixture_id": "fixture-missing-nodes-edges",
+  "expected_exit_code": 1,
+  "expected_diagnostics": [
+    {
+      "rule_id": "SEMANTIC-BE-006",
+      "kind": "violation",
+      "severity": "error",
+      "message_contains": "backend semantic canvas shape"
+    },
+    {
+      "rule_id": "SYNTAX-002",
+      "kind": "violation",
+      "severity": "error",
+      "message_contains": "canvas.nodes"
+    },
+    {
+      "rule_id": "SYNTAX-003",
+      "kind": "violation",
+      "severity": "error",
+      "message_contains": "canvas.edges"
+    }
+  ],
+  "assert_absent_rule_ids": []
+}

@@ -1,0 +1,25 @@
+{
+  "fixture_id": "fixture-loop-partial-subcanvas-ports",
+  "expected_exit_code": 1,
+  "expected_diagnostics": [
+    {
+      "rule_id": "SEMANTIC-FE-006",
+      "kind": "violation",
+      "severity": "error",
+      "message_contains": "start port is not connected"
+    },
+    {
+      "rule_id": "SEMANTIC-FE-007",
+      "kind": "violation",
+      "severity": "error",
+      "message_contains": "end port is not connected"
+    },
+    {
+      "rule_id": "SEMANTIC-BE-007",
+      "kind": "violation",
+      "severity": "warning",
+      "message_contains": "isolated nodes"
+    }
+  ],
+  "assert_absent_rule_ids": []
+}

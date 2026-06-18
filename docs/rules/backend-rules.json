@@ -1,0 +1,134 @@
+[
+  {
+    "id": "BE-DetectCycles-001",
+    "function_name": "DetectCycles",
+    "check_type": "graph",
+    "logic": "Builds reverse adjacency from edges (controlSuccessors), runs DFS cycle detection via detectCycles(). For each cycle found, emits a PathErr for every consecutive edge pair in the cycle (skipping self-loops).",
+    "error_message": "line connections do not allow parallel lines to intersect and form loops with each other",
+    "error_category": "PathErr",
+    "source_file": "backend/domain/workflow/internal/canvas/validate/canvas_validate.go",
+    "line_number": 114,
+    "description": "Detects cycles in the workflow graph. Each edge in a cycle produces a PathErr between the two connected nodes."
+  },
+  {
+    "id": "BE-validateConnections-001",
+    "function_name": "validateConnections",
+    "check_type": "link",
+    "logic": "For entry (start) nodes, checks that outDegree > 0 (the start node has at least one outgoing edge).",
+    "error_message": "node \"start\" not connected",
+    "error_category": "NodeErr",
+    "source_file": "backend/domain/workflow/internal/canvas/validate/canvas_validate.go",
+    "line_number": 529,
+    "description": "Validates that the start node is connected to at least one downstream node via an outgoing edge."
+  },
+  {
+    "id": "BE-validateConnections-002",
+    "function_name": "validateConnections",
+    "check_type": "link",
+    "logic": "For selector/branch nodes (nodes with expected ports from BranchAdaptor or error-handling exception branches), checks that every expected port has at least one outgoing edge. Accumulates missing ports into one message.",
+    "error_message": "node \"%v\"'s port \"%v\" not connected;",
+    "error_category": "NodeErr",
+    "source_file": "backend/domain/workflow/internal/canvas/validate/canvas_validate.go",
+    "line_number": 538,
+    "description": "Validates that every port on a selector/branch node (including error-handling exception branch ports) has at least one outgoing connection. Missing ports are concatenated into a single message."
+  },
+  {
+    "id": "BE-validateConnections-003",
+    "function_name": "validateConnections",
+    "check_type": "link",
+    "logic": "For non-selector, non-entry, non-exit, non-break, non-continue nodes, checks that outDegree > 0.",
+    "error_message": "node \"%v\" not connected",
+    "error_category": "NodeErr",
+    "source_file": "backend/domain/workflow/internal/canvas/validate/canvas_validate.go",
+    "line_number": 559,
+    "description": "Validates that a regular (non-branch, non-terminal) node has at least one outgoing connection. Break and Continue nodes are excluded from this check."
+  },
+  {
+    "id": "BE-CheckRefVariable-001",
+    "function_name": "CheckRefVariable",
+    "check_type": "runtime",
+    "logic": "When a BlockInput value is of type Ref and source is BlockOutput, checks that the BlockID field is not empty.",
+    "error_message": "ref block error,[blockID] is empty",
+    "error_category": "NodeErr",
+    "source_file": "backend/domain/workflow/internal/canvas/validate/canvas_validate.go",
+    "line_number": 168,
+    "description": "Validates that a block output reference has a non-empty block ID. Guards against malformed variable references."
+  },
+  {
+    "id": "BE-CheckRefVariable-002",
+    "function_name": "CheckRefVariable",
+    "check_type": "runtime",
+    "logic": "When a BlockInput value references a block output (source=BlockOutput), checks that the referenced block ID exists among the combined reachable nodes (current scope + parent scopes).",
+    "error_message": "the node id \"%s\" on which node id \"%s\" depends does not exist",
+    "error_category": "NodeErr",
+    "source_file": "backend/domain/workflow/internal/canvas/validate/canvas_validate.go",
+    "line_number": 179,
+    "description": "Validates that the node referenced by a variable dependency actually exists in the reachable graph. Catches dangling references to deleted or unreachable nodes."
+  },
+  {
+    "id": "BE-CheckRefVariable-003",
+    "function_name": "CheckRefVariable",
+    "check_type": "runtime",
+    "logic": "For every InputParameter on reachable nodes, validates the parameter name against regex ^[A-Za-z_][A-Za-z0-9_]*$ (must start with letter/underscore, followed by alphanumeric/underscore only).",
+    "error_message": "parameter name only allows number or alphabet, and must begin with alphabet, but it's \"%s\"",
+    "error_category": "NodeErr",
+    "source_file": "backend/domain/workflow/internal/canvas/validate/canvas_validate.go",
+    "line_number": 197,
+    "description": "Validates input parameter naming conventions. Parameter names must be valid identifiers: start with a letter or underscore, contain only alphanumeric characters and underscores."
+  },
+  {
+    "id": "BE-ValidateNestedFlows-001",
+    "function_name": "ValidateNestedFlows",
+    "check_type": "graph",
+    "logic": "Iterates reachable nodes. If a node has nested reachability (it is a composite node like batch/loop), and that nested reachability itself contains further nested reachability (i.e., doubly nested composite nodes), emits an error.",
+    "error_message": "composite nodes such as batch/loop cannot be nested",
+    "error_category": "NodeErr",
+    "source_file": "backend/domain/workflow/internal/canvas/validate/canvas_validate.go",
+    "line_number": 254,
+    "description": "Prevents nesting of composite nodes (batch, loop) inside other composite nodes. Only one level of nesting is allowed."
+  },
+  {
+    "id": "BE-CheckGlobalVariables-001",
+    "function_name": "CheckGlobalVariables",
+    "check_type": "runtime",
+    "logic": "For VariableAssigner nodes, compares the type of each assigned variable against the global variable metadata (app-level or agent-level). If the types differ, emits an error.",
+    "error_message": "node name %v,param [%s], type mismatch",
+    "error_category": "NodeErr",
+    "source_file": "backend/domain/workflow/internal/canvas/validate/canvas_validate.go",
+    "line_number": 314,
+    "description": "Validates that variable assignments match the declared type of the corresponding global variable. Catches type mismatches between local assignment and global variable definition."
+  },
+  {
+    "id": "BE-CheckGlobalVariables-002",
+    "function_name": "CheckGlobalVariables",
+    "check_type": "runtime",
+    "logic": "When both the global variable and the local assignment are array types, compares the element types. If the array element types differ, emits an error.",
+    "error_message": "node name %v, param [%s], array element type mismatch",
+    "error_category": "NodeErr",
+    "source_file": "backend/domain/workflow/internal/canvas/validate/canvas_validate.go",
+    "line_number": 324,
+    "description": "Validates that array-type global variable assignments have matching element types. Extends the type mismatch check to array element level."
+  },
+  {
+    "id": "BE-CheckSubWorkFlowTerminatePlanType-001",
+    "function_name": "CheckSubWorkFlowTerminatePlanType",
+    "check_type": "runtime",
+    "logic": "Collects all sub-workflow nodes, resolves their referenced workflow canvases (by draft ID or versioned ID). If the referenced workflow canvas cannot be found in the resolved map, emits an error.",
+    "error_message": "sub workflow has been modified, please refresh the page",
+    "error_category": "NodeErr",
+    "source_file": "backend/domain/workflow/internal/canvas/validate/canvas_validate.go",
+    "line_number": 423,
+    "description": "Validates that a sub-workflow reference resolves to an existing workflow. Catches stale references after the sub-workflow has been deleted or modified."
+  },
+  {
+    "id": "BE-CheckSubWorkFlowTerminatePlanType-002",
+    "function_name": "CheckSubWorkFlowTerminatePlanType",
+    "check_type": "runtime",
+    "logic": "When the sub-workflow canvas is found, retrieves its end node and compares the end node's TerminatePlan with the parent node's TerminationType (mapped via toTerminatePlan). If they differ, the sub-workflow has been modified incompatibly.",
+    "error_message": "sub workflow has been modified, please refresh the page",
+    "error_category": "NodeErr",
+    "source_file": "backend/domain/workflow/internal/canvas/validate/canvas_validate.go",
+    "line_number": 437,
+    "description": "Validates that the sub-workflow's termination plan matches what the parent workflow expects. Catches cases where the sub-workflow's end behavior changed after initial linking."
+  }
+]

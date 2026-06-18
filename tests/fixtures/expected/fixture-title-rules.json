@@ -1,0 +1,25 @@
+{
+  "fixture_id": "fixture-title-rules",
+  "expected_exit_code": 1,
+  "expected_diagnostics": [
+    {
+      "rule_id": "SEMANTIC-FE-009",
+      "kind": "violation",
+      "severity": "error",
+      "message_contains": "title is required"
+    },
+    {
+      "rule_id": "SEMANTIC-FE-010",
+      "kind": "violation",
+      "severity": "error",
+      "message_contains": "exceeds 63"
+    },
+    {
+      "rule_id": "SEMANTIC-FE-011",
+      "kind": "violation",
+      "severity": "error",
+      "message_contains": "must be unique"
+    }
+  ],
+  "assert_absent_rule_ids": []
+}

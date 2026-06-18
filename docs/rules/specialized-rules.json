@@ -1,0 +1,371 @@
+[
+  {
+    "id": "SPEC-COND-001",
+    "rule_type": "condition",
+    "check_type": "static",
+    "logic": "条件左值(left)必须非空且通过 valueExpressionValidator 验证。当 disabled=true 时跳过验证。",
+    "error_message": "workflow_detail_condition_error_refer_empty",
+    "constants": {},
+    "source_file": "frontend/packages/workflow/playground/src/form-extensions/setters/condition/multi-condition/validate/validate.ts",
+    "line_number": 65,
+    "description": "条件分支左值必填验证，使用 valueExpressionValidator(required:true) 进行表达式验证"
+  },
+  {
+    "id": "SPEC-COND-002",
+    "rule_type": "condition",
+    "check_type": "static",
+    "logic": "条件操作符(operator)必须非 nil/null。当 disabled=true 时跳过验证。",
+    "error_message": "workflow_detail_condition_condition_empty",
+    "constants": {},
+    "source_file": "frontend/packages/workflow/playground/src/form-extensions/setters/condition/multi-condition/validate/validate.ts",
+    "line_number": 83,
+    "description": "条件分支操作符必填验证"
+  },
+  {
+    "id": "SPEC-COND-003",
+    "rule_type": "condition",
+    "check_type": "static",
+    "logic": "条件右值(right)必须非空且通过 valueExpressionValidator 验证。当操作符为一元运算符时(disabled=true)跳过验证。",
+    "error_message": "workflow_detail_condition_error_enter_comparison",
+    "constants": {},
+    "source_file": "frontend/packages/workflow/playground/src/form-extensions/setters/condition/multi-condition/validate/validate.ts",
+    "line_number": 95,
+    "description": "条件分支右值必填验证，一元运算符时右值禁用"
+  },
+  {
+    "id": "SPEC-COND-004",
+    "rule_type": "condition",
+    "check_type": "static",
+    "logic": "完整条件验证：遍历所有分支(branch)的所有条件(condition)，对每个条件的 left/operator/right 分别验证。错误消息用分号连接。",
+    "error_message": "多个验证错误用分号拼接返回",
+    "constants": {},
+    "source_file": "frontend/packages/workflow/playground/src/form-extensions/setters/condition/multi-condition/validate/validate.ts",
+    "line_number": 140,
+    "description": "外部触发的全分支验证入口，返回 true 或错误消息字符串"
+  },
+  {
+    "id": "SPEC-COND-ENUM-001",
+    "rule_type": "condition",
+    "check_type": "static",
+    "logic": "ConditionType 完整枚举: Equal=1, NotEqual=2, LengthGt=3, LengthGtEqual=4, LengthLt=5, LengthLtEqual=6, Contains=7, NotContains=8, Null=9, NotNull=10, True=11, False=12, Gt=13, GtEqual=14, Lt=15, LtEqual=16",
+    "error_message": "N/A - 枚举定义",
+    "constants": {
+      "Equal": 1,
+      "NotEqual": 2,
+      "LengthGt": 3,
+      "LengthGtEqual": 4,
+      "LengthLt": 5,
+      "LengthLtEqual": 6,
+      "Contains": 7,
+      "NotContains": 8,
+      "Null": 9,
+      "NotNull": 10,
+      "True": 11,
+      "False": 12,
+      "Gt": 13,
+      "GtEqual": 14,
+      "Lt": 15,
+      "LtEqual": 16
+    },
+    "source_file": "frontend/packages/arch/idl/src/auto-generated/workflow_api/namespaces/workflow.ts",
+    "line_number": 157,
+    "description": "条件比较操作符完整枚举，共16种"
+  },
+  {
+    "id": "SPEC-COND-ENUM-002",
+    "rule_type": "condition",
+    "check_type": "static",
+    "logic": "一元运算符列表(不需要右值): ConditionType.Null(9), ConditionType.NotNull(10), ConditionType.True(11), ConditionType.False(12)",
+    "error_message": "N/A - 一元运算符定义",
+    "constants": {
+      "DISABLED_CONDITION_TYPES": [9, 10, 11, 12]
+    },
+    "source_file": "frontend/packages/workflow/playground/src/form-extensions/setters/condition/multi-condition/condition-params-item/utils.ts",
+    "line_number": 31,
+    "description": "一元运算符使右值输入禁用。这些操作符不需要右值，验证时跳过右值检查"
+  },
+  {
+    "id": "SPEC-COND-ENUM-003",
+    "rule_type": "condition",
+    "check_type": "static",
+    "logic": "长度比较运算符列表: ConditionType.LengthGt(3), ConditionType.LengthGtEqual(4), ConditionType.LengthLt(5), ConditionType.LengthLtEqual(6)",
+    "error_message": "N/A - 运算符分类定义",
+    "constants": {
+      "COMPARE_LENGTH_CONDITION_TYPES": [3, 4, 5, 6]
+    },
+    "source_file": "frontend/packages/workflow/playground/src/form-extensions/setters/condition/multi-condition/condition-params-item/utils.ts",
+    "line_number": 37,
+    "description": "长度比较运算符，影响右值输入类型约束"
+  },
+  {
+    "id": "SPEC-COND-TYPE-001",
+    "rule_type": "condition",
+    "check_type": "static",
+    "logic": "右值类型映射(基本类型): String→String, Integer→[Integer,Number], Number→[Number,Integer], Boolean→Boolean, Object→String",
+    "error_message": "N/A - 类型映射规则",
+    "constants": {
+      "String": ["String"],
+      "Integer": ["Integer", "Number"],
+      "Number": ["Number", "Integer"],
+      "Boolean": ["Boolean"],
+      "Object": ["String"]
+    },
+    "source_file": "frontend/packages/workflow/playground/src/form-extensions/setters/condition/multi-condition/condition-params-item/utils.ts",
+    "line_number": 133,
+    "description": "根据左值类型确定右值允许的输入类型"
+  },
+  {
+    "id": "SPEC-COND-TYPE-002",
+    "rule_type": "condition",
+    "check_type": "static",
+    "logic": "数组类型长度比较: Array类型+LengthGt/LengthGtEqual/LengthLt/LengthLtEqual时，右值仅允许 Integer 类型",
+    "error_message": "N/A - 类型约束规则",
+    "constants": {
+      "Array+LengthCompare": "Integer"
+    },
+    "source_file": "frontend/packages/workflow/playground/src/form-extensions/setters/condition/multi-condition/condition-params-item/utils.ts",
+    "line_number": 119,
+    "description": "数组类型的长度比较运算符右值约束为整数"
+  },
+  {
+    "id": "SPEC-COND-TYPE-003",
+    "rule_type": "condition",
+    "check_type": "static",
+    "logic": "数组类型包含/不包含: Array类型+Contains/NotContains时，右值允许 [Array子类型, Array本身类型]",
+    "error_message": "N/A - 类型约束规则",
+    "constants": {
+      "Array+Contains": "元素子类型或数组本身类型"
+    },
+    "source_file": "frontend/packages/workflow/playground/src/form-extensions/setters/condition/multi-condition/condition-params-item/utils.ts",
+    "line_number": 125,
+    "description": "数组类型的包含操作右值可以是元素类型或数组类型"
+  },
+  {
+    "id": "SPEC-COND-TYPE-004",
+    "rule_type": "condition",
+    "check_type": "static",
+    "logic": "字符串长度比较: String类型+LengthGt/LengthGtEqual/LengthLt/LengthLtEqual时，新数据右值默认 Integer，历史数据兼容 String",
+    "error_message": "N/A - 类型兼容规则",
+    "constants": {
+      "String+LengthCompare+new": "Integer",
+      "String+LengthCompare+legacy": "String(兼容)"
+    },
+    "source_file": "frontend/packages/workflow/playground/src/form-extensions/setters/condition/multi-condition/condition-params-item/utils.ts",
+    "line_number": 100,
+    "description": "字符串长度比较时右值类型，新数据为整数，历史数据兼容字符串"
+  },
+  {
+    "id": "SPEC-COND-TYPE-005",
+    "rule_type": "condition",
+    "check_type": "static",
+    "logic": "右值输入类型映射(含数组类型): ArrayBoolean→Boolean, ArrayInteger→Number, ArrayNumber→Number, ArrayObject→String, ArrayString→String",
+    "error_message": "N/A - 类型映射规则",
+    "constants": {
+      "ArrayBoolean": "Boolean",
+      "ArrayInteger": "Number",
+      "ArrayNumber": "Number",
+      "ArrayObject": "String",
+      "ArrayString": "String"
+    },
+    "source_file": "frontend/packages/workflow/playground/src/form-extensions/setters/condition/multi-condition/condition-params-item/utils.ts",
+    "line_number": 166,
+    "description": "含数组类型的右值输入类型映射，用于 getInputTypeFromSourceTypeAndOperation"
+  },
+  {
+    "id": "SPEC-COND-LOGIC-001",
+    "rule_type": "condition",
+    "check_type": "static",
+    "logic": "左值类型变更时清空操作符和右值：当左值的源类型从无到有或类型发生变化时，清空 operator 和 right",
+    "error_message": "N/A - 数据处理逻辑",
+    "constants": {},
+    "source_file": "frontend/packages/workflow/playground/src/form-extensions/setters/condition/multi-condition/condition-params-item/utils.ts",
+    "line_number": 62,
+    "description": "processLeftSourceTypeChange：左值类型变更时重置后续字段"
+  },
+  {
+    "id": "SPEC-COND-LOGIC-002",
+    "rule_type": "condition",
+    "check_type": "static",
+    "logic": "操作符切换时类型校验：切换操作符后，若右值类型与新操作符要求不匹配，清空右值。一元运算符始终清空右值。",
+    "error_message": "N/A - 数据处理逻辑",
+    "constants": {},
+    "source_file": "frontend/packages/workflow/playground/src/form-extensions/setters/condition/multi-condition/condition-params-item/utils.ts",
+    "line_number": 83,
+    "description": "processConditionData：操作符变更时校验右值类型兼容性"
+  },
+  {
+    "id": "SPEC-COND-LOGIC-003",
+    "rule_type": "condition",
+    "check_type": "static",
+    "logic": "布尔类型右值默认值：当左值为 Boolean 或 ArrayBoolean 且右值为 LITERAL 类型且 content 为 nil 时，默认设置 content=false",
+    "error_message": "N/A - 默认值逻辑",
+    "constants": {
+      "defaultBooleanValue": false
+    },
+    "source_file": "frontend/packages/workflow/playground/src/form-extensions/setters/condition/multi-condition/condition-params-item/utils.ts",
+    "line_number": 103,
+    "description": "processRightDefaultValue：布尔类型右值自动填充默认值 false"
+  },
+  {
+    "id": "SPEC-OUT-001",
+    "rule_type": "output",
+    "check_type": "static",
+    "logic": "输出变量名格式正则: /^[a-zA-Z_][a-zA-Z_$0-9]*$/ — 必须以字母或下划线开头，仅允许字母、数字、下划线、$",
+    "error_message": "workflow_detail_node_error_format",
+    "constants": {
+      "pattern": "^[a-zA-Z_][a-zA-Z_$0-9]*$"
+    },
+    "source_file": "frontend/packages/workflow/playground/src/node-registries/common/fields/outputs/output-tree-meta-validator.ts",
+    "line_number": 29,
+    "description": "输出变量命名格式验证，适用于所有输出树节点"
+  },
+  {
+    "id": "SPEC-OUT-002",
+    "rule_type": "output",
+    "check_type": "static",
+    "logic": "输出变量名保留字禁用: 变量名中不得包含完整单词 true, false, and, AND, or, OR, not, NOT, null, nil, If, Switch。使用否定前瞻 \\b(...)\b 实现。",
+    "error_message": "workflow_detail_node_error_format",
+    "constants": {
+      "reserved_words": ["true", "false", "and", "AND", "or", "OR", "not", "NOT", "null", "nil", "If", "Switch"]
+    },
+    "source_file": "frontend/packages/workflow/playground/src/node-registries/common/fields/outputs/output-tree-meta-validator.ts",
+    "line_number": 28,
+    "description": "输出变量名不得包含保留字作为完整单词，与格式正则合并为一条正则"
+  },
+  {
+    "id": "SPEC-OUT-003",
+    "rule_type": "output",
+    "check_type": "static",
+    "logic": "输出变量名必填: name 字段必须为非空字符串(min 1)",
+    "error_message": "workflow_detail_node_error_name_empty",
+    "constants": {},
+    "source_file": "frontend/packages/workflow/playground/src/node-registries/common/fields/outputs/output-tree-meta-validator.ts",
+    "line_number": 33,
+    "description": "输出变量名不能为空"
+  },
+  {
+    "id": "SPEC-OUT-004",
+    "rule_type": "output",
+    "check_type": "static",
+    "logic": "输出树结构递归验证: 使用 z.lazy 递归验证 children 数组，每个子节点同样需要满足 name 格式和保留字约束",
+    "error_message": "同父节点验证规则",
+    "constants": {},
+    "source_file": "frontend/packages/workflow/playground/src/node-registries/common/fields/outputs/output-tree-meta-validator.ts",
+    "line_number": 30,
+    "description": "OutputTreeMetaSchema 为递归结构，children 中每个节点独立验证"
+  },
+  {
+    "id": "SPEC-OUT-005",
+    "rule_type": "output",
+    "check_type": "static",
+    "logic": "errorBody 过滤: 当 settingOnErrorIsOpen=true 时，验证前过滤掉 errorBody 节点。批量模式从 children 中过滤，单模式从顶层过滤。",
+    "error_message": "N/A - 预处理逻辑",
+    "constants": {
+      "errorBodyFieldName": "errorBody"
+    },
+    "source_file": "frontend/packages/workflow/playground/src/node-registries/common/fields/outputs/output-tree-meta-validator.ts",
+    "line_number": 43,
+    "description": "异常处理开启时，errorBody 字段不参与输出变量名验证"
+  },
+  {
+    "id": "SPEC-OUT-006",
+    "rule_type": "output",
+    "check_type": "static",
+    "logic": "输出变量名唯一性: 同级兄弟节点的 name 不得重复，递归检查 children。重复时返回错误路径和 workflow_detail_node_error_variablename_duplicated 消息。",
+    "error_message": "workflow_detail_node_error_variablename_duplicated",
+    "constants": {},
+    "source_file": "frontend/packages/workflow/nodes/src/validators/output-tree-validator/schema.ts",
+    "line_number": 52,
+    "description": "OutputTreeUniqueNameSchema 同级变量名唯一性检查"
+  },
+  {
+    "id": "SPEC-OUT-007",
+    "rule_type": "output",
+    "check_type": "static",
+    "logic": "Object/JSON 类型 defaultValue 验证: 当 type 为 JSON 输入类型且 defaultValue 非空字符串时，必须通过 jsonSchemaValidator 验证为合法 JSON",
+    "error_message": "workflow_debug_wrong_json",
+    "constants": {},
+    "source_file": "frontend/packages/workflow/nodes/src/validators/output-tree-validator/schema.ts",
+    "line_number": 86,
+    "description": "JSON 类型节点的默认值必须是合法 JSON，仅检查第一层不递归"
+  },
+  {
+    "id": "SPEC-OUT-008",
+    "rule_type": "output",
+    "check_type": "static",
+    "logic": "输出树 type 必填: 每个节点必须有 type(number 类型)字段",
+    "error_message": "N/A - schema 约束",
+    "constants": {},
+    "source_file": "frontend/packages/workflow/nodes/src/validators/output-tree-validator/schema.ts",
+    "line_number": 33,
+    "description": "OutputTreeNodeSchema 中 type 为必填 number 字段"
+  },
+  {
+    "id": "SPEC-OUT-LLM-001",
+    "rule_type": "output",
+    "check_type": "static",
+    "logic": "LLM 输出变量名禁止使用 reasoning_content: name 不能等于 'reasoning_content'，这是系统保留的思维链内容字段名",
+    "error_message": "workflow_250213_01",
+    "constants": {
+      "REASONING_CONTENT_NAME": "reasoning_content"
+    },
+    "source_file": "frontend/packages/workflow/playground/src/nodes-v2/llm/validators/llm-output-tree-meta-validator.ts",
+    "line_number": 40,
+    "description": "LLM 节点输出变量特殊限制，reasoning_content 为系统思维链字段保留"
+  },
+  {
+    "id": "SPEC-OUT-LLM-002",
+    "rule_type": "output",
+    "check_type": "static",
+    "logic": "LLM 输出验证额外过滤: 验证前同时过滤 errorBody 和系统思维链内容(omitSystemReasoningContent)，两者独立处理",
+    "error_message": "N/A - 预处理逻辑",
+    "constants": {},
+    "source_file": "frontend/packages/workflow/playground/src/nodes-v2/llm/validators/llm-output-tree-meta-validator.ts",
+    "line_number": 50,
+    "description": "LLM 节点输出验证需要额外过滤思维链系统字段"
+  },
+  {
+    "id": "SPEC-OUT-VAL-001",
+    "rule_type": "output",
+    "check_type": "static",
+    "logic": "outputTreeValidator 入口: 根据 options.uniqueName 选择 OutputTreeUniqueNameSchema 或 OutputTreeSchema 进行验证，验证失败返回 JSON.stringify(error)",
+    "error_message": "JSON.stringify(ZodError)",
+    "constants": {},
+    "source_file": "frontend/packages/workflow/nodes/src/validators/output-tree-validator/index.ts",
+    "line_number": 30,
+    "description": "输出树验证器入口函数，支持唯一性检查可选开关"
+  },
+  {
+    "id": "SPEC-QUES-001",
+    "rule_type": "question",
+    "check_type": "static",
+    "logic": "Question 选项内容不可为空: 每个选项的 name 字段 trim 后不得为空字符串",
+    "error_message": "workflow_ques_option_notempty (选项内容不可为空)",
+    "constants": {},
+    "source_file": "frontend/packages/workflow/nodes/src/validators/question-option-validator.ts",
+    "line_number": 35,
+    "description": "Question 节点每个选项的 name 不能为空"
+  },
+  {
+    "id": "SPEC-QUES-002",
+    "rule_type": "question",
+    "check_type": "static",
+    "logic": "Question 选项内容不可重复: 使用 Set 追踪已出现的 name，重复时报告错误",
+    "error_message": "workflow_ques_ans_testrun_dulpicate (选项内容不可重复)",
+    "constants": {},
+    "source_file": "frontend/packages/workflow/nodes/src/validators/question-option-validator.ts",
+    "line_number": 45,
+    "description": "Question 节点选项名称不允许重复"
+  },
+  {
+    "id": "SPEC-QUES-003",
+    "rule_type": "question",
+    "check_type": "static",
+    "logic": "Question 选项验证入口: 使用 nonEmptyUniqueArray Zod schema 验证，通过返回 true，失败返回 JSON.stringify(error)",
+    "error_message": "JSON.stringify(ZodError)",
+    "constants": {},
+    "source_file": "frontend/packages/workflow/nodes/src/validators/question-option-validator.ts",
+    "line_number": 56,
+    "description": "Question 选项验证器入口函数"
+  }
+]

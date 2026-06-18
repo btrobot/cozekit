@@ -1,0 +1,417 @@
+[
+  {
+    "fixture_id": "AssignMergeSmoke-draft.yaml",
+    "rule_ids": [
+      "SEMANTIC-BE-017"
+    ],
+    "diagnostic_count": 1
+  },
+  {
+    "fixture_id": "X109_Vlaohuangli_pro_video_1-draft_2.yaml",
+    "rule_ids": [
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021"
+    ],
+    "diagnostic_count": 20
+  },
+  {
+    "fixture_id": "X11_Tdouyin2_table_1-draft.yaml",
+    "rule_ids": [
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021"
+    ],
+    "diagnostic_count": 4
+  },
+  {
+    "fixture_id": "X12_Tdouyin4_table_1-draft.yaml",
+    "rule_ids": [
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-FE-006",
+      "SEMANTIC-FE-007"
+    ],
+    "diagnostic_count": 8
+  },
+  {
+    "fixture_id": "X13_Sshuzire_genghuan_shuziren_1-draft.yaml",
+    "rule_ids": [
+      "SEMANTIC-BE-021",
+      "SEMANTIC-FE-006"
+    ],
+    "diagnostic_count": 2
+  },
+  {
+    "fixture_id": "X14_W_tiqujiucuo_word_1-draft.yaml",
+    "rule_ids": [
+      "SEMANTIC-BE-021"
+    ],
+    "diagnostic_count": 1
+  },
+  {
+    "fixture_id": "X15_Vtuiwen_video_1-draft.yaml",
+    "rule_ids": [
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-FE-006",
+      "SEMANTIC-FE-006",
+      "SEMANTIC-FE-007",
+      "SEMANTIC-FE-007"
+    ],
+    "diagnostic_count": 13
+  },
+  {
+    "fixture_id": "X16_W_tiquwenzi_word_1-draft.yaml",
+    "rule_ids": [
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-FE-006",
+      "SEMANTIC-FE-007"
+    ],
+    "diagnostic_count": 7
+  },
+  {
+    "fixture_id": "X17_Wgaixinwenwnan_word_1-draft.yaml",
+    "rule_ids": [],
+    "diagnostic_count": 0
+  },
+  {
+    "fixture_id": "X18_W_fenjingjiaoben_word_1-draft.yaml",
+    "rule_ids": [
+      "SEMANTIC-BE-021"
+    ],
+    "diagnostic_count": 1
+  },
+  {
+    "fixture_id": "X19_Tdouyin3_table_1-draft.yaml",
+    "rule_ids": [
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-FE-006",
+      "SEMANTIC-FE-007"
+    ],
+    "diagnostic_count": 9
+  },
+  {
+    "fixture_id": "X1_Wshipintiqu_url_1-draft.yaml",
+    "rule_ids": [],
+    "diagnostic_count": 0
+  },
+  {
+    "fixture_id": "X20_Tred2_table_1-draft.yaml",
+    "rule_ids": [
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-FE-006",
+      "SEMANTIC-FE-007"
+    ],
+    "diagnostic_count": 8
+  },
+  {
+    "fixture_id": "X21_Tredbook_table_1-draft.yaml",
+    "rule_ids": [],
+    "diagnostic_count": 0
+  },
+  {
+    "fixture_id": "X22_T_piliang2_table_1-draft.yaml",
+    "rule_ids": [
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-FE-006",
+      "SEMANTIC-FE-007"
+    ],
+    "diagnostic_count": 8
+  },
+  {
+    "fixture_id": "X23_Tpiliang_table_2_1-draft.yaml",
+    "rule_ids": [
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-FE-006",
+      "SEMANTIC-FE-007"
+    ],
+    "diagnostic_count": 11
+  },
+  {
+    "fixture_id": "X24_Vxhsyangsheng_video_1-draft.yaml",
+    "rule_ids": [
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021"
+    ],
+    "diagnostic_count": 7
+  },
+  {
+    "fixture_id": "X26_Wbaogao_word_1-draft.yaml",
+    "rule_ids": [],
+    "diagnostic_count": 0
+  },
+  {
+    "fixture_id": "X27_Wzaixianjianli_word_1-draft.yaml",
+    "rule_ids": [],
+    "diagnostic_count": 0
+  },
+  {
+    "fixture_id": "X28_W27zaixianjianli_word_1-draft.yaml",
+    "rule_ids": [],
+    "diagnostic_count": 0
+  },
+  {
+    "fixture_id": "X29_Wzaixianjianli_word_1-draft.yaml",
+    "rule_ids": [],
+    "diagnostic_count": 0
+  },
+  {
+    "fixture_id": "X2_W05_douyinweidu_word_-draft.yaml",
+    "rule_ids": [
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-FE-006",
+      "SEMANTIC-FE-007"
+    ],
+    "diagnostic_count": 4
+  },
+  {
+    "fixture_id": "X38_V19_shudan_video-draft.yaml",
+    "rule_ids": [
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021"
+    ],
+    "diagnostic_count": 34
+  },
+  {
+    "fixture_id": "X3_Tdouyinshuju_table_1-draft.yaml",
+    "rule_ids": [
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-FE-006",
+      "SEMANTIC-FE-007"
+    ],
+    "diagnostic_count": 8
+  },
+  {
+    "fixture_id": "X43_Vfanyeshudan_video-draft.yaml",
+    "rule_ids": [
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021"
+    ],
+    "diagnostic_count": 19
+  },
+  {
+    "fixture_id": "X44_Pyingyu_picture-draft.yaml",
+    "rule_ids": [
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021"
+    ],
+    "diagnostic_count": 17
+  },
+  {
+    "fixture_id": "X47_Pzhiyu_picture-draft.yaml",
+    "rule_ids": [
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-FE-006",
+      "SEMANTIC-FE-006",
+      "SEMANTIC-FE-007",
+      "SEMANTIC-FE-007"
+    ],
+    "diagnostic_count": 12
+  },
+  {
+    "fixture_id": "X4_Tdouyinfeishu_table_1-draft.yaml",
+    "rule_ids": [
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-FE-006",
+      "SEMANTIC-FE-007"
+    ],
+    "diagnostic_count": 6
+  },
+  {
+    "fixture_id": "X5_TDYwushuiyin_table_1-draft.yaml",
+    "rule_ids": [
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-FE-006",
+      "SEMANTIC-FE-007"
+    ],
+    "diagnostic_count": 6
+  },
+  {
+    "fixture_id": "X6_Wdagangshuchu_word_1-draft.yaml",
+    "rule_ids": [
+      "SEMANTIC-BE-021"
+    ],
+    "diagnostic_count": 1
+  },
+  {
+    "fixture_id": "X7_W_red_word_1-draft.yaml",
+    "rule_ids": [],
+    "diagnostic_count": 0
+  },
+  {
+    "fixture_id": "X97_Vgecishiping_video_1-draft.yaml",
+    "rule_ids": [
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021",
+      "SEMANTIC-BE-021"
+    ],
+    "diagnostic_count": 17
+  },
+  {
+    "fixture_id": "X9_Wgongzhonghao_word_1-draft.yaml",
+    "rule_ids": [
+      "SEMANTIC-BE-021"
+    ],
+    "diagnostic_count": 1
+  }
+]

@@ -1,0 +1,13 @@
+{
+  "fixture_id": "fixture-loop-nested-batch",
+  "expected_exit_code": 1,
+  "expected_diagnostics": [
+    {
+      "rule_id": "SEMANTIC-BE-016",
+      "kind": "violation",
+      "severity": "error",
+      "message_contains": "cannot be nested"
+    }
+  ],
+  "assert_absent_rule_ids": []
+}

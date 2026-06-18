@@ -1,0 +1,91 @@
+[
+  {
+    "fixture_id": "fixture-minimal-start-end",
+    "ir_node_count": 2,
+    "ir_edge_count": 1,
+    "ir_node_ids": [
+      "100001",
+      "900001"
+    ],
+    "ir_canvas_count": 1
+  },
+  {
+    "fixture_id": "fixture-missing-nodes-edges",
+    "ir_node_count": 0,
+    "ir_edge_count": 0,
+    "ir_node_ids": [],
+    "ir_canvas_count": 1
+  },
+  {
+    "fixture_id": "fixture-if-missing-branch-ports",
+    "ir_node_count": 3,
+    "ir_edge_count": 2,
+    "ir_node_ids": [
+      "100001",
+      "900001",
+      "if-1"
+    ],
+    "ir_canvas_count": 1
+  },
+  {
+    "fixture_id": "fixture-loop-nested-batch",
+    "ir_node_count": 5,
+    "ir_edge_count": 5,
+    "ir_node_ids": [
+      "100001",
+      "900001",
+      "900001",
+      "batch-1",
+      "loop-1"
+    ],
+    "ir_canvas_count": 2
+  },
+  {
+    "fixture_id": "fixture-global-variable-type-mismatch",
+    "ir_node_count": 5,
+    "ir_edge_count": 5,
+    "ir_node_ids": [
+      "100001",
+      "900001",
+      "900001",
+      "loop-1",
+      "set-1"
+    ],
+    "ir_canvas_count": 2
+  },
+  {
+    "fixture_id": "fixture-non-assign-global-ref-read",
+    "ir_node_count": 3,
+    "ir_edge_count": 2,
+    "ir_node_ids": [
+      "100001",
+      "900001",
+      "llm-1"
+    ],
+    "ir_canvas_count": 1
+  },
+  {
+    "fixture_id": "fixture-title-rules",
+    "ir_node_count": 4,
+    "ir_edge_count": 3,
+    "ir_node_ids": [
+      "100001",
+      "900001",
+      "n1",
+      "n2"
+    ],
+    "ir_canvas_count": 1
+  },
+  {
+    "fixture_id": "fixture-loop-partial-subcanvas-ports",
+    "ir_node_count": 4,
+    "ir_edge_count": 2,
+    "ir_node_ids": [
+      "100001",
+      "900001",
+      "inner-1",
+      "loop-1"
+    ],
+    "ir_canvas_count": 2
+  }
+]

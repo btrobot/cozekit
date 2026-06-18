@@ -1,0 +1,132 @@
+# Python bytecode and cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.python-version
+
+# Testing and coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+*.cover
+*.py,cover
+.hypothesis/
+.tox/
+.nox/
+coverage.xml
+*.cover
+.coverage.*
+
+# Type checking and linting
+.mypy_cache/
+.pyright_cache/
+.dmypy.json
+dmypy.json
+.ruff_cache/
+.flake8
+.pylint_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# pdm
+.pdm.toml
+.pdm-python
+.pdm-build/
+
+# PEP 582
+__pypackages__/
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+.factorypath
+*.sublime-project
+*.sublime-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Project-specific
+.omx/
+AGENTS.md
+AI_SLOP_CLEANUP_REPORT.md
+scripts/
+
+# cozekit specific
+*.coze
+*.coze.bak
+cozekit-*.tar.gz
+cozekit-*.whl
+
+# Documentation
+docs/_build/
+site/
+*.md.bak
+
+# Misc
+*.log
+*.tmp
+*.temp
+*.bak
+*.backup
+*.orig

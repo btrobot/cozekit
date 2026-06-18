@@ -1,0 +1,13 @@
+{
+  "fixture_id": "fixture-global-variable-type-mismatch",
+  "expected_exit_code": 1,
+  "expected_diagnostics": [
+    {
+      "rule_id": "SEMANTIC-BE-020",
+      "kind": "violation",
+      "severity": "error",
+      "message_contains": "type mismatch"
+    }
+  ],
+  "assert_absent_rule_ids": []
+}

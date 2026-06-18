@@ -1,0 +1,13 @@
+{
+  "fixture_id": "fixture-if-missing-branch-ports",
+  "expected_exit_code": 1,
+  "expected_diagnostics": [
+    {
+      "rule_id": "SEMANTIC-BE-010",
+      "kind": "violation",
+      "severity": "error",
+      "message_contains": "required branch/exception outgoing ports"
+    }
+  ],
+  "assert_absent_rule_ids": []
+}

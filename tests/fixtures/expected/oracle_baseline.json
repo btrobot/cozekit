@@ -1,0 +1,133 @@
+[
+  {
+    "fixture_id": "fixture-global-variable-type-mismatch",
+    "rule_ids": [
+      "SEMANTIC-FE-001",
+      "SEMANTIC-FE-001"
+    ],
+    "diagnostic_count": 3,
+    "exit_code": 1,
+    "node_count": 3,
+    "edge_count": 2,
+    "node_ids": [
+      "100001",
+      "900001",
+      "loop-1"
+    ]
+  },
+  {
+    "fixture_id": "fixture-if-missing-branch-ports",
+    "rule_ids": [
+      "SEMANTIC-BE-010"
+    ],
+    "diagnostic_count": 1,
+    "exit_code": 1,
+    "node_count": 3,
+    "edge_count": 2,
+    "node_ids": [
+      "100001",
+      "900001",
+      "if-1"
+    ]
+  },
+  {
+    "fixture_id": "fixture-loop-nested-batch",
+    "rule_ids": [
+      "SEMANTIC-BE-016"
+    ],
+    "diagnostic_count": 2,
+    "exit_code": 1,
+    "node_count": 3,
+    "edge_count": 2,
+    "node_ids": [
+      "100001",
+      "900001",
+      "loop-1"
+    ]
+  },
+  {
+    "fixture_id": "fixture-loop-partial-subcanvas-ports",
+    "rule_ids": [
+      "SEMANTIC-FE-006",
+      "SEMANTIC-FE-007",
+      "SEMANTIC-FE-001",
+      "SEMANTIC-FE-001",
+      "SEMANTIC-BE-002",
+      "SEMANTIC-BE-002",
+      "SEMANTIC-BE-007"
+    ],
+    "diagnostic_count": 6,
+    "exit_code": 1,
+    "node_count": 3,
+    "edge_count": 2,
+    "node_ids": [
+      "100001",
+      "900001",
+      "loop-1"
+    ]
+  },
+  {
+    "fixture_id": "fixture-minimal-start-end",
+    "rule_ids": [],
+    "diagnostic_count": 0,
+    "exit_code": 0,
+    "node_count": 2,
+    "edge_count": 1,
+    "node_ids": [
+      "100001",
+      "900001"
+    ]
+  },
+  {
+    "fixture_id": "fixture-missing-nodes-edges",
+    "rule_ids": [
+      "SEMANTIC-BE-004",
+      "SEMANTIC-BE-005",
+      "SEMANTIC-BE-006",
+      "SYNTAX-002",
+      "SYNTAX-003"
+    ],
+    "diagnostic_count": 5,
+    "exit_code": 1,
+    "node_count": 0,
+    "edge_count": 0,
+    "node_ids": []
+  },
+  {
+    "fixture_id": "fixture-non-assign-global-ref-read",
+    "rule_ids": [
+      "SEMANTIC-FE-001"
+    ],
+    "diagnostic_count": 1,
+    "exit_code": 1,
+    "node_count": 3,
+    "edge_count": 2,
+    "node_ids": [
+      "100001",
+      "900001",
+      "llm-1"
+    ]
+  },
+  {
+    "fixture_id": "fixture-title-rules",
+    "rule_ids": [
+      "SEMANTIC-FE-009",
+      "SEMANTIC-FE-010",
+      "SEMANTIC-FE-011",
+      "SEMANTIC-FE-011",
+      "SEMANTIC-FE-001",
+      "SEMANTIC-FE-001",
+      "SEMANTIC-FE-001"
+    ],
+    "diagnostic_count": 7,
+    "exit_code": 1,
+    "node_count": 4,
+    "edge_count": 3,
+    "node_ids": [
+      "100001",
+      "900001",
+      "n1",
+      "n2"
+    ]
+  }
+]
