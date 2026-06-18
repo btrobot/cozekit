@@ -39,3 +39,11 @@ packages = ["src/cozekit"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]
+markers = [
+    "unit: Isolated function/class tests without pipeline",
+    "integration: Multi-module collaboration tests",
+    "spec: Coze Workflow Spec rule validation",
+    "regression: Bug fix regression locks",
+    "e2e: End-to-end CLI/API tests",
+    "gate: Engineering health guardrails",
+]

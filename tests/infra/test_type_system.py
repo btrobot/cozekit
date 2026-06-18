@@ -17,6 +17,9 @@ from cozekit.sema.type_system import (
     extract_declared_type_from_param,
 )
 
+import pytest
+pytestmark = pytest.mark.unit
+
 
 def _make_flat(*nodes: NodeAST, edges: tuple[EdgeAST, ...] = ()) -> tuple[AnalysisGraph, ASTIndices]:
     """Build a minimal AnalysisGraph + ASTIndices from nodes."""

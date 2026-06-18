@@ -7,6 +7,9 @@ which defers to runtime (UNKNOWN state).
 import pytest
 from tests.conftest import compile_text
 
+import pytest
+pytestmark = pytest.mark.regression
+
 
 def _be021(yaml_text: str) -> list[str]:
     report = compile_text(yaml_text)

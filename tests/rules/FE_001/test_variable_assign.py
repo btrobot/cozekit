@@ -20,6 +20,9 @@ import pytest
 
 from tests.conftest import compile_text
 
+import pytest
+pytestmark = pytest.mark.regression
+
 
 def _fe001_errors(yaml_text: str) -> list[str]:
     report = compile_text(yaml_text)

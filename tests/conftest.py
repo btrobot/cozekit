@@ -90,3 +90,54 @@ def wrap_workflow(*nodes_yaml: str, edges: str | None = None) -> str:
 
     nodes_str = '\n'.join(all_nodes)
     return f"nodes:\n{nodes_str}\nedges:\n{edges_str}\n"
+
+# ── Test layer markers ───────────────────────────────────────────
+LAYER_MARKERS = {"unit", "integration", "spec", "regression", "e2e", "gate"}
+
+
+def pytest_configure(config):
+    """Register test layer markers."""
+    for name in LAYER_MARKERS:
+        config.addinivalue_line("markers", f"{name}: {name} test layer")
+
+
+# ── E2E / Gate fixtures ──────────────────────────────────────────
+@pytest.fixture
+def cli_runner():
+    """Click test runner for CLI tests."""
+    from click.testing import CliRunner
+    return CliRunner()
+
+
+@pytest.fixture
+def all_yaml_fixtures():
+    """All YAML fixture files."""
+    return sorted(Path("tests/fixtures/yaml").glob("*.yaml"))
+
+
+@pytest.fixture
+def x109_fixture():
+    """X109 commercial fixture path."""
+    return Path("tests/fixtures/yaml/x109_commercial.yaml")
+
+def pytest_collection_modifyitems(items):
+    """Apply layer markers based on test file path."""
+    for item in items:
+        path = str(item.fspath)
+
+        # Already has an explicit layer marker? Skip.
+        item_markers = {m.name for m in item.iter_markers()}
+        if item_markers & LAYER_MARKERS:
+            continue
+
+        # Apply markers based on path
+        if '/rules/' in path:
+            item.add_marker(pytest.mark.spec)
+        elif '/infra/' in path:
+            item.add_marker(pytest.mark.integration)
+        elif '/ast/' in path:
+            item.add_marker(pytest.mark.integration)
+        elif '/transport/' in path:
+            item.add_marker(pytest.mark.integration)
+        elif '/passes/' in path:
+            item.add_marker(pytest.mark.integration)
