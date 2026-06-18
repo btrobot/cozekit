@@ -1,13 +1,13 @@
-"""coze-compiler — Coze Workflow Static Validator.
+"""cozekit — Coze Workflow Static Validator.
 
 Command-line interface for validating Coze workflow YAML/JSON files.
 
 Usage:
-    coze-compiler check <file>                  Validate a single file
-    coze-compiler check <dir>                   Validate all .yaml/.json files in directory
-    coze-compiler check <file> --format json    Output diagnostics as JSON
-    coze-compiler check <file> --quiet          Only output if violations found
-    coze-compiler info                          Show compiler version and capabilities
+    cozekit check <file>                  Validate a single file
+    cozekit check <dir>                   Validate all .yaml/.json files in directory
+    cozekit check <file> --format json    Output diagnostics as JSON
+    cozekit check <file> --quiet          Only output if violations found
+    cozekit info                          Show compiler version and capabilities
 """
 from __future__ import annotations
 
@@ -235,7 +235,7 @@ def _check_batch(files: list[Path], fmt: str, show_ok: bool) -> int:
 
 def cmd_info(args: argparse.Namespace) -> int:
     """Show compiler info."""
-    print(bold(f"coze-compiler v{__version__}"))
+    print(bold(f"cozekit v{__version__}"))
     print()
     print("  Coze Workflow Static Validator")
     print("  Textbook compiler architecture: transport → AST → semantic → passes")
@@ -257,10 +257,10 @@ def cmd_info(args: argparse.Namespace) -> int:
     print(f"    {red('2')}  Compiler error")
     print()
     print(bold("  Examples:"))
-    print("    coze-compiler check workflow.yaml")
-    print("    coze-compiler check ./workflows/ --format json")
-    print("    coze-compiler check workflow.yaml --format compact")
-    print("    coze-compiler check workflow.yaml --quiet")
+    print("    cozekit check workflow.yaml")
+    print("    cozekit check ./workflows/ --format json")
+    print("    cozekit check workflow.yaml --format compact")
+    print("    cozekit check workflow.yaml --quiet")
     return EXIT_CLEAN
 
 
@@ -268,10 +268,10 @@ def cmd_info(args: argparse.Namespace) -> int:
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        prog="coze-compiler",
+        prog="cozekit",
         description="Coze Workflow Static Validator — validate workflow files without a runtime",
     )
-    parser.add_argument("--version", action="version", version=f"coze-compiler {__version__}")
+    parser.add_argument("--version", action="version", version=f"cozekit {__version__}")
 
     sub = parser.add_subparsers(dest="command", help="command")
 
