@@ -25,7 +25,7 @@ from .io_validators import check_exception_json, check_input_tree, check_output_
 # Subcanvas entry/exit port IDs for composite nodes
 _LOOP_BATCH_PORT_IDS: dict[str, tuple[str, str]] = {
     LOOP_NODE_TYPE_ID: ('loop-function-inline-input', 'loop-function-inline-output'),
-    BATCH_NODE_TYPE_ID: ('loop-function-inline-input', 'loop-function-inline-output'),
+    BATCH_NODE_TYPE_ID: ('batch-function-inline-input', 'batch-function-inline-output'),
 }
 
 

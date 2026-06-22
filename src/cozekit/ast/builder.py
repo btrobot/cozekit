@@ -195,10 +195,10 @@ class ASTBuilder:
         _, edges_raw = self._get_blocks_raw(n, data)
         nested_edges = tuple(
             EdgeAST(
-                source_node_id=str(e.get('sourceNodeID', '')),
-                target_node_id=str(e.get('targetNodeID', '')),
-                source_port_id=e.get('sourcePortID'),
-                target_port_id=e.get('targetPortID'),
+                source_node_id=str(e.get('sourceNodeID', e.get('source_node', ''))),
+                target_node_id=str(e.get('targetNodeID', e.get('target_node', ''))),
+                source_port_id=e.get('sourcePortID') or e.get('source_port'),
+                target_port_id=e.get('targetPortID') or e.get('target_port'),
                 canvas_path=sub_path,
                 provenance=SourceProvenance(source_file=source_file),
                 source_span=self._lookup_nested_edge_span(
@@ -553,10 +553,10 @@ class ASTBuilder:
                 continue
             try:
                 result.append(EdgeAST(
-                    source_node_id=str(e.get('sourceNodeID', '')),
-                    target_node_id=str(e.get('targetNodeID', '')),
-                    source_port_id=e.get('sourcePortID'),
-                    target_port_id=e.get('targetPortID'),
+                    source_node_id=str(e.get('sourceNodeID', e.get('source_node', ''))),
+                    target_node_id=str(e.get('targetNodeID', e.get('target_node', ''))),
+                    source_port_id=e.get('sourcePortID') or e.get('source_port'),
+                    target_port_id=e.get('targetPortID') or e.get('target_port'),
                     canvas_path=canvas_path,
                     provenance=SourceProvenance(source_file=source_file),
                     source_span=span_map.lookup_path(('edges', str(i))) if span_map else None,

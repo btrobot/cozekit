@@ -19,9 +19,7 @@
     "fixture_id": "X12_Tdouyin4_table_1-draft.yaml",
     "rule_ids": [
       "SEMANTIC-BE-021",
-      "SEMANTIC-BE-021",
-      "SEMANTIC-FE-006",
-      "SEMANTIC-FE-007"
+      "SEMANTIC-BE-021"
     ]
   },
   {
@@ -40,19 +38,13 @@
     "rule_ids": [
       "SEMANTIC-BE-021",
       "SEMANTIC-BE-021",
-      "SEMANTIC-BE-021",
-      "SEMANTIC-FE-006",
-      "SEMANTIC-FE-006",
-      "SEMANTIC-FE-007",
-      "SEMANTIC-FE-007"
+      "SEMANTIC-BE-021"
     ]
   },
   {
     "fixture_id": "X16_W_tiquwenzi_word_1-draft.yaml",
     "rule_ids": [
-      "SEMANTIC-BE-021",
-      "SEMANTIC-FE-006",
-      "SEMANTIC-FE-007"
+      "SEMANTIC-BE-021"
     ]
   },
   {
@@ -67,9 +59,7 @@
     "fixture_id": "X19_Tdouyin3_table_1-draft.yaml",
     "rule_ids": [
       "SEMANTIC-BE-021",
-      "SEMANTIC-BE-021",
-      "SEMANTIC-FE-006",
-      "SEMANTIC-FE-007"
+      "SEMANTIC-BE-021"
     ]
   },
   {
@@ -81,9 +71,7 @@
     "rule_ids": [
       "SEMANTIC-BE-021",
       "SEMANTIC-BE-021",
-      "SEMANTIC-BE-021",
-      "SEMANTIC-FE-006",
-      "SEMANTIC-FE-007"
+      "SEMANTIC-BE-021"
     ]
   },
   {
@@ -94,18 +82,14 @@
     "fixture_id": "X22_T_piliang2_table_1-draft.yaml",
     "rule_ids": [
       "SEMANTIC-BE-021",
-      "SEMANTIC-BE-021",
-      "SEMANTIC-FE-006",
-      "SEMANTIC-FE-007"
+      "SEMANTIC-BE-021"
     ]
   },
   {
     "fixture_id": "X23_Tpiliang_table_2_1-draft.yaml",
     "rule_ids": [
       "SEMANTIC-BE-021",
-      "SEMANTIC-BE-021",
-      "SEMANTIC-FE-006",
-      "SEMANTIC-FE-007"
+      "SEMANTIC-BE-021"
     ]
   },
   {
@@ -133,9 +117,7 @@
   {
     "fixture_id": "X2_W05_douyinweidu_word_-draft.yaml",
     "rule_ids": [
-      "SEMANTIC-BE-021",
-      "SEMANTIC-FE-006",
-      "SEMANTIC-FE-007"
+      "SEMANTIC-BE-021"
     ]
   },
   {
@@ -153,9 +135,7 @@
     "fixture_id": "X3_Tdouyinshuju_table_1-draft.yaml",
     "rule_ids": [
       "SEMANTIC-BE-021",
-      "SEMANTIC-BE-021",
-      "SEMANTIC-FE-006",
-      "SEMANTIC-FE-007"
+      "SEMANTIC-BE-021"
     ]
   },
   {
@@ -176,26 +156,16 @@
       "SEMANTIC-BE-021",
       "SEMANTIC-BE-021",
       "SEMANTIC-BE-021",
-      "SEMANTIC-BE-021",
-      "SEMANTIC-FE-006",
-      "SEMANTIC-FE-006",
-      "SEMANTIC-FE-007",
-      "SEMANTIC-FE-007"
+      "SEMANTIC-BE-021"
     ]
   },
   {
     "fixture_id": "X4_Tdouyinfeishu_table_1-draft.yaml",
-    "rule_ids": [
-      "SEMANTIC-FE-006",
-      "SEMANTIC-FE-007"
-    ]
+    "rule_ids": []
   },
   {
     "fixture_id": "X5_TDYwushuiyin_table_1-draft.yaml",
-    "rule_ids": [
-      "SEMANTIC-FE-006",
-      "SEMANTIC-FE-007"
-    ]
+    "rule_ids": []
   },
   {
     "fixture_id": "X6_Wdagangshuchu_word_1-draft.yaml",
